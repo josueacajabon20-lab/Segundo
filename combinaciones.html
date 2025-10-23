@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./combinaciones.css">
+    <title>Combinaciones</title>
+</head>
+<body>
+    <!-- Barra Superior -->
+    <header class="navbar">
+        <div class="logo">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="menu-lateral">
+                <ul>
+                    <li><a href="./index.html">REGRESAR A INICIO</a></li>
+                    <li><a href="./Principio.html">-> PRINCIPIO FUNDAMENTAL DE CONTEO</a></li>
+                    <li><a href="./permutaciones.html">-> PERMUTACIONES</a></li>
+                    <li><a href="./teoria_de_grafos.html">-> TEORIA DE GRAFOS</a></li>
+                    <li><a href="./leyes.html">-> LEYES DE LA TEORIA DE CONJUNTOS</a></li>
+                    <li><a href="#">CRÉDITOS</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="titulo">
+            <h1>Matemática Discreta</h1>
+            <p class="subtitulo">
+                "Entre lo indivisible y lo finito, la matemática discreta traza los límites del pensamiento lógico, 
+                donde cada elemento cuenta y cada relación revela una estructura."
+            </p>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="contenido">
+    <section class="info">
+        <div class="texto">
+            <h2>Combinaciones</h2>
+            <p>
+                Una combinación es una selección de elementos de un conjunto, sin importar el orden. A diferencia de las permutaciones, en las combinaciones el orden no altera el resultado.
+            </p>
+            <p>Donde n es el número total de elementos y r es el número de elementos a
+            seleccionar. La combinatoria, rama de las matemáticas discretas que estudia
+            las combinaciones, se centra en contar las diferentes formas de agrupar
+            elementos.</p>
+            <h1 class="formula">Formula Directa</h1>
+            <p>n C r = n! / (r! * (n-r)!)</p>
+            <h1 class="formula">Puntos importantes </h1>
+            <p>1. n! es el factorial de n <br>2. r es el número de elementos seleccionados <br>3. (r/n​) se lee “n sobre r”</p>
+        </div>
+
+        <div class="imagen">
+            <img src="./formula_combinaciones_fondo_claro.jpg" alt="Ejemplo de combinaciones">
+            <span class="borde-luz"></span>
+        </div>
+    </section>
+    <section class="info">
+         <div class="imagen">
+            <img src="./combinaciones_ropa_fondo_claro.jpg" alt="Ejemplo de combinaciones">
+            <span class="borde-luz"></span>
+        </div>
+        <div class="texto">
+            
+            <h1 class="formula">Propiedades </h1>
+            <p>Simetria: (n/r​)=(n/n-r​) <br>
+            Suma de combinaciones: (n/r​)+(n/r-1​)=(n+1/r​)</p>
+            <p>Las agrupaciones combinatorias denominadas combinaciones son las que se obtienen al seleccionar de un conjunto de n elementos, grupos de r, de tal forma que cada grupo es diferente de los demás, si y sólo  si, contiene algún elemento diferente, sea cual sea su orden de  colocación en el grupo.</p>
+            <h1 class="formula">Factorial de un número</h1>
+            <p>Se denomina factorial de un número entero y positivo n, que se simboliza por n!, al producto de n factores consecutivos que empiezan  por la unidad y terminan por el número n, ambos incluidos. O sea:
+
+n! = n × (n - 1) x (n - 2) × …× 1</p>
+        </div>
+
+       
+    </section>
+    <section class="info">
+        <div class="texto">
+            
+            
+ <h1 class="formula">Aplicaciones practicas</h1>
+ <p>
+    1. Probabilidad y Estadística: <br>
+     Cálculo de probabilidades: Se usan para determinar la cantidad de formas en que pueden ocurrir eventos sin importar el orden. <br>
+    Muestreo aleatorio: Selección de muestras de una población sin importar el orden de los elementos. <br> <br>
+    2. Criptografía: <br>
+     Generación de claves: Las combinaciones ayudan a calcular el número de posibles claves o contraseñas cuando el orden no importa. <br>
+    Análisis de fuerza bruta: Determinar cuántas combinaciones posibles hay para romper una clave. <br> <br>
+    3. Ingenieria y diseño: <br>
+     Diseño de sistemas: Selección de componentes para formar sistemas con ciertas características. <br>
+    Pruebas de software: Generación de casos de prueba combinando diferentes entradas posibles.
+ </p>
+            <h1 class="formula">Ejemplo practico</h1>
+            <p>¿Cuántas formas hay de elegir 3 estudiantes de un grupo de 10? <br>
+            (10, 3) = 10! / 3! (10 - 3)!= 10 * 9 * 8 / 3 * 2 * 1 = 120 <br>
+        Respuesta: Hay 120 formas de elegir 3 estudiantes de un grupo de 10.</p>
+       
+        </div>
+
+       
+    </section>
+    <section class="calculadora">
+    <h2>Calculadora de Combinaciones</h2>
+    <p>Introduce los valores de <strong>n</strong> y <strong>r</strong> para calcular el número de combinaciones posibles (nCr) y ver el procedimiento paso a paso.</p>
+    
+    <div class="calc-contenedor">
+        <label for="n">Valor de n (total de elementos):</label>
+        <input type="number" id="n" min="0" placeholder="Ej: 10">
+
+        <label for="r">Valor de r (elementos seleccionados):</label>
+        <input type="number" id="r" min="0" placeholder="Ej: 3">
+
+        <button id="btnCalcular">Calcular</button>
+
+        <div class="resultado" id="resultado"></div>
+        <div class="procedimiento" id="procedimiento"></div>
+    </div>
+</section>
+
+<script>
+function factorial(num) {
+    if (num === 0 || num === 1) return 1;
+    let resultado = 1;
+    for (let i = 2; i <= num; i++) resultado *= i;
+    return resultado;
+}
+
+document.getElementById("btnCalcular").addEventListener("click", function() {
+    const n = parseInt(document.getElementById("n").value);
+    const r = parseInt(document.getElementById("r").value);
+    const resultadoDiv = document.getElementById("resultado");
+    const procedimientoDiv = document.getElementById("procedimiento");
+
+    if (isNaN(n) || isNaN(r) || r > n || n < 0 || r < 0) {
+        resultadoDiv.innerHTML = "<p style='color:#ff6b6b;'>⚠️ Verifica los valores. Asegúrate de que n ≥ r ≥ 0.</p>";
+        procedimientoDiv.innerHTML = "";
+        return;
+    }
+
+    const nFact = factorial(n);
+    const rFact = factorial(r);
+    const nrFact = factorial(n - r);
+    const combinaciones = nFact / (rFact * nrFact);
+
+    resultadoDiv.innerHTML = `<p>🔹 Resultado: <strong>${combinaciones}</strong> combinaciones posibles.</p>`;
+
+    procedimientoDiv.innerHTML = `
+        <h3>Procedimiento:</h3>
+        <p>La fórmula es: <br> <strong>nCr = n! / (r! × (n - r)!)</strong></p>
+        <p>Sustituyendo los valores: <br> <strong>${n}C${r} = ${n}! / (${r}! × (${n} - ${r})!)</strong></p>
+        <p>Resolviendo los factoriales: <br>
+        <strong>${n}! = ${nFact.toLocaleString()} <br>
+        ${r}! = ${rFact.toLocaleString()} <br>
+        (${n} - ${r})! = ${nrFact.toLocaleString()}</strong></p>
+        <p>Entonces: <br>
+        <strong>${n}C${r} = ${nFact.toLocaleString()} / (${rFact.toLocaleString()} × ${nrFact.toLocaleString()})</strong></p>
+        <p>Finalmente: <br>
+        <strong>${n}C${r} = ${combinaciones.toLocaleString()}</strong></p>
+    `;
+});
+</script>
+
+</main>
+</body>
+</html>

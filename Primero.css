@@ -1,0 +1,316 @@
+/* Fondo general */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #f5faff;
+}
+
+/* Barra superior */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15, 32, 39, 0.95);
+    background-image: url('../fondo\ 2.webp');
+    padding: 17px 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h2 {
+    margin: 0;
+    color: #00d4ff;
+    font-weight: 600;
+}
+
+.titulo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.titulo h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    background: linear-gradient(90deg, #00d4ff, #007BFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 10px rgba(0, 212, 255, 0.5);
+    animation: brillo 3s infinite alternate;
+}
+
+@keyframes brillo {
+    from { text-shadow: 0 0 10px #00d4ff, 0 0 20px #007BFF; }
+    to { text-shadow: 0 0 25px #00d4ff, 0 0 50px #007BFF; }
+}
+
+/* Contenido */
+.contenido {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+/* Grid de tarjetas */
+.grid0 {
+    text-align: center;
+    font-size: 1.2rem;
+    background: linear-gradient(90deg, #a09a9a, #978989);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    text-shadow: 2px 2px 10px rgba(233, 250, 253, 0.877);
+    animation: brillo1 3s infinite alternate;
+}
+
+@keyframes brillo1 {
+    from { text-shadow: 0 0 10px #8be6f8, 0 0 20px #000000; }
+    to { text-shadow: 0 0 25px #80d5e5, 0 0 50px #000000; }
+}
+.grid1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 700px;
+}
+/* Grid de tarjetas */
+.grid2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+    gap: 30px;
+    width: 1100px;
+}
+
+/* Tarjeta:Temas */
+.card {
+    width: 90%;
+    height: 180px;
+    perspective: 1000px;
+    text-decoration: none;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Frente y reversa */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Frente */
+.card-front {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 212, 255, 0.08);
+    border: 2px solid #00d4ff;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Imagen en la parte superior */
+.card-image {
+    flex: 3;
+    width: 100%;
+    height: 65%;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* evita que se deforme, no tocar */
+    border-bottom: 2px solid #00d4ff;
+}
+
+/* Título en la parte inferior: Temas */
+.card-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 212, 255, 0.12);
+    border-top: 2px solid #00d4ff;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.card-title h2 {
+    color: #00d4ff;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+
+/* Reversa */
+.card-back {
+    background: rgba(0, 123, 255, 0.1);
+    border: 2px solid #007BFF;
+    transform: rotateY(180deg);
+    padding: 20px;
+    text-align: center;
+    color: #f5faff;
+    font-size: 1rem;
+}
+/* Ícono de menú  */
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1002;
+}
+
+.menu-icon span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #00d4ff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Menú lateral */
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0; /* cerrado por defecto */
+    background: rgba(15, 32, 39, 0.98);
+    border-right: 2px solid #00d4ff;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+    overflow: hidden;
+    transition: width 0.4s ease;
+    z-index: 1001;
+}
+
+/* Estructura interna */
+.menu-lateral ul {
+    list-style: none;
+    padding: 80px 0 0 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.menu-lateral li {
+    transition: background 0.3s ease;
+}
+
+.menu-lateral li:hover {
+    background: rgba(0, 212, 255, 0.15);
+    border-radius: 5px;
+}
+
+.menu-lateral a {
+    color: #f5faff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    display: block;
+    padding: 10px 15px;
+}
+
+
+
+/* Muestra el menú cuando el cursor está sobre el icono o el menú */
+.logo:hover .menu-lateral,
+.menu-lateral:hover {
+    width: 260px; 
+}
+
+/* Animación icono*/
+.menu-icon:hover span:nth-child(1),
+.menu-icon:hover span:nth-child(2),
+.menu-icon:hover span:nth-child(3) {
+    transform: scaleX(0.9);
+}
+/* === SUBMENÚ DESPLEGABLE SIN ESPACIO EXTRA === */
+.menu-lateral input[type="checkbox"] {
+    display: none;
+}
+
+/* Botón principal (CONTACTO / INTEGRANTES) */
+.menu-lateral label {
+    color: #f5faff;
+    font-size: 0.8rem;
+    display: block;
+    padding: 10px 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.menu-lateral label:hover {
+    background: rgba(0, 212, 255, 0.15);
+    border-radius: 5px;
+    color: #00d4ff;
+}
+
+/* Cada opción con submenú */
+.has-submenu {
+    overflow: hidden; /* evita que deje huecos */
+    transition: all 0.3s ease;
+}
+
+/* Submenú oculto sin espacio */
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding-left: 20px;
+    transition: all 0.3s ease ease-in-out;
+}
+
+/* Submenú visible */
+.menu-lateral input[type="checkbox"]:checked + label + .submenu {
+    max-height: 200px;
+    opacity: 1;
+}
+
+/* Ítems del submenú */
+.submenu li {
+    list-style: none;
+    color: #00d4ff;
+    padding: 5px 0;
+    font-size: 0.75rem;
+    transition: color 0.3s ease;
+}
+
+.submenu li:hover {
+    color: #80e9ff;
+}
+
+/* Evita márgenes innecesarios */
+.menu-lateral li {
+    margin: 0;
+    padding: 0;
+}

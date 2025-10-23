@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora - Principio Fundamental del Conteo</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #34495e;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #16a085;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Calculadora del Fundamento del Conteo</h2>
+        <p>Ingresa el número de opciones en cada evento:</p>
+
+        <div id="inputs">
+            <div class="input-group">
+                <input type="number" placeholder="Evento 1" min="1">
+            </div>
+        </div>
+
+        <button id="agregar">➕ Agregar Evento</button>
+        <button id="calcular">🧮 Calcular</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        const inputsDiv = document.getElementById("inputs");
+        const agregarBtn = document.getElementById("agregar");
+        const calcularBtn = document.getElementById("calcular");
+        const resultado = document.getElementById("resultado");
+
+        // Agregar nuevos campos de entrada
+        agregarBtn.addEventListener("click", () => {
+            const inputGroup = document.createElement("div");
+            inputGroup.classList.add("input-group");
+            inputGroup.innerHTML = `<input type="number" placeholder="Evento ${inputsDiv.children.length + 1}" min="1">`;
+            inputsDiv.appendChild(inputGroup);
+        });
+
+        // Calcular el total usando el principio fundamental del conteo
+        calcularBtn.addEventListener("click", () => {
+            const valores = document.querySelectorAll("#inputs input");
+            let total = 1;
+            let validos = true;
+
+            valores.forEach(input => {
+                const valor = parseInt(input.value);
+                if (!isNaN(valor) && valor > 0) {
+                    total *= valor;
+                } else {
+                    validos = false;
+                }
+            });
+
+            if (validos && valores.length > 0) {
+                resultado.textContent = `Total de combinaciones posibles: ${total}`;
+            } else {
+                resultado.textContent = "Por favor, ingresa valores válidos para todos los eventos.";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Teoría de Grafos - Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #f5faff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .back-button:hover {
+            background: #357ae8;
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Nueva sección de teoría */
+        .theory-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .theory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .theory-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4a90e2;
+        }
+
+        .theory-card h3 {
+            color: #4a90e2;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .theory-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .theory-card li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .theory-card li:before {
+            content: "•";
+            color: #4a90e2;
+            position: absolute;
+            left: 0;
+        }
+
+        .algorithm-steps {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .step {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: #4a90e2;
+            border-radius: 50%;
+            text-align: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .graph-container {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .controls {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .canvas-container {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #graphCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        .control-group {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 5px;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        button:hover {
+            background: #357ae8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .problem-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        select, input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .results {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        #resultOutput {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 100px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+        
+        .node-info {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .node-info input {
+            flex: 1;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .theory-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-button {
+                position: static;
+                transform: none;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="back-button" id="backButton">← Página Principal</button>
+            <h1>Teoría de Grafos Interactiva</h1>
+            <p class="subtitle">Visualiza y resuelve problemas de grafos con algoritmos avanzados</p>
+        </header>
+
+        <!-- Nueva sección de teoría -->
+        <div class="theory-section">
+            <h2>Teoría Fundamental de Grafos</h2>
+            <div class="theory-grid">
+                <div class="theory-card">
+                    <h3>Elementos de los Grafos</h3>
+                    <ul>
+                        <li><strong>Vértices/Nodos:</strong> Puntos fundamentales del grafo</li>
+                        <li><strong>Aristas:</strong> Conexiones entre vértices</li>
+                        <li><strong>Grado:</strong> Número de aristas incidentes a un vértice</li>
+                        <li><strong>Camino:</strong> Secuencia de vértices conectados</li>
+                        <li><strong>Ciclo:</strong> Camino que comienza y termina en el mismo vértice</li>
+                        <li><strong>Grafo Conexo:</strong> Existe camino entre cualquier par de vértices</li>
+                    </ul>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Grafos Planos</h3>
+                    <ul>
+                        <li>Se pueden dibujar sin que las aristas se crucen</li>
+                        <li><strong>Fórmula de Euler:</strong> V - A + C = 2</li>
+                        <li><strong>Teorema de Kuratowski:</strong> Un grafo es plano si no contiene subgrafos que sean subdivisiones de K₅ o K₃,₃</li>
+                        <li><strong>Caras:</strong> Regiones delimitadas por aristas</li>
+                    </ul>
+                    <div class="algorithm-steps">
+                        <h4>¿Cómo verificar si un grafo es plano?</h4>
+                        <div class="step"><span class="step-number">1</span>Verificar si tiene más de 4 vértices</div>
+                        <div class="step"><span class="step-number">2</span>Buscar subgrafos homeomorfos a K₅ o K₃,₃</div>
+                        <div class="step"><span class="step-number">3</span>Aplicar algoritmos de planaridad (Boyar-Myrvold)</div>
+                    </div>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Grafos Eulerianos</h3>
+                    <ul>
+                        <li><strong>Camino Euleriano:</strong> Recorre todas las aristas una vez</li>
+                        <li><strong>Ciclo Euleriano:</strong> Camino euleriano cerrado</li>
+                        <li><strong>Teorema:</strong> Un grafo conexo tiene ciclo euleriano si y solo si todos los vértices tienen grado par</li>
+                        <li><strong>Teorema:</strong> Tiene camino euleriano si exactamente 0 o 2 vértices tienen grado impar</li>
+                    </ul>
+                    <div class="algorithm-steps">
+                        <h4>Algoritmo de Fleury</h4>
+                        <div class="step"><span class="step-number">1</span>Verificar condiciones de Euler</div>
+                        <div class="step"><span class="step-number">2</span>Comenzar en vértice con grado impar (si existe)</div>
+                        <div class="step"><span class="step-number">3</span>No usar aristas que desconecten el grafo</div>
+                    </div>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Grafos Hamiltonianos</h3>
+                    <ul>
+                        <li><strong>Ciclo Hamiltoniano:</strong> Recorre todos los vértices una vez y regresa al inicio</li>
+                        <li><strong>Camino Hamiltoniano:</strong> Recorre todos los vértices una vez sin cerrar ciclo</li>
+                        <li><strong>Problema NP-Completo:</strong> No existe algoritmo eficiente conocido</li>
+                        <li><strong>Condición de Dirac:</strong> Si n ≥ 3 y grado(v) ≥ n/2 para todo v, entonces es hamiltoniano</li>
+                    </ul>
+                    <div class="algorithm-steps">
+                        <h4>Encontrar ciclos hamiltonianos</h4>
+                        <div class="step"><span class="step-number">1</span>Usar backtracking o fuerza bruta para grafos pequeños</div>
+                        <div class="step"><span class="step-number">2</span>Aplicar heurísticas para grafos grandes</div>
+                        <div class="step"><span class="step-number">3</span>Verificar condiciones suficientes (Dirac, Ore)</div>
+                    </div>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Teoremas Importantes</h3>
+                    <ul>
+                        <li><strong>Teorema de los Cuatro Colores:</strong> Todo grafo plano es 4-coloreable</li>
+                        <li><strong>Teorema de Handshaking:</strong> ∑grado(v) = 2|A|</li>
+                        <li><strong>Teorema de Menger:</strong> Sobre conectividad y caminos disjuntos</li>
+                        <li><strong>Teorema de Hall:</strong> Para emparejamientos en grafos bipartitos</li>
+                    </ul>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Complementos de Grafos</h3>
+                    <ul>
+                        <li><strong>Grafo Complemento:</strong> Tiene las mismas aristas que no están en el original</li>
+                        <li><strong>Grafo Autocomplementario:</strong> Isomorfo a su complemento</li>
+                        <li><strong>Relación:</strong> G ∪ G' = Kₙ (grafo completo)</li>
+                        <li><strong>Aplicaciones:</strong> En teoría de Ramsey y coloraciones</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="graph-container">
+                <h2>Visualización del Grafo</h2>
+                <div class="canvas-container">
+                    <canvas id="graphCanvas"></canvas>
+                </div>
+                <div class="node-info">
+                    <input type="text" id="node1" placeholder="Nodo 1">
+                    <input type="text" id="node2" placeholder="Nodo 2">
+                    <input type="number" id="weight" placeholder="Peso (opcional)" min="1">
+                    <button id="addEdge">Añadir Arista</button>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <h2>Construcción del Grafo</h2>
+                    <div class="button-group">
+                        <button id="addNode">Añadir Nodo</button>
+                        <button id="clearGraph">Limpiar Grafo</button>
+                        <button id="generateRandom">Grafo Aleatorio</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h2>Problemas a Resolver</h2>
+                    <div class="problem-selector">
+                        <select id="problemType">
+                            <option value="shortestPath">Camino más corto (Dijkstra)</option>
+                            <option value="connectivity">Conectividad</option>
+                            <option value="eulerian">Camino Euleriano</option>
+                            <option value="hamiltonian">Ciclo Hamiltoniano</option>
+                            <option value="planarity">Verificar Planaridad</option>
+                        </select>
+                        
+                        <div class="node-info">
+                            <input type="text" id="startNode" placeholder="Nodo inicial (para camino)">
+                            <input type="text" id="endNode" placeholder="Nodo final (para camino)">
+                        </div>
+                        
+                        <button id="solveProblem">Resolver Problema</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h2>Resultados</h2>
+                    <div class="results">
+                        <div id="resultOutput">Los resultados aparecerán aquí...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+            </div>
+
+    <script>
+        // Simulación de un módulo WebAssembly de C++
+        // En una implementación real, esto sería compilado desde C++ a WebAssembly
+        
+        // Simulación de funciones de grafos en C++
+        const GraphModule = {
+            // Estructura de datos del grafo
+            graph: {
+                nodes: [],
+                edges: [],
+                adjacency: {}
+            },
+            
+            // Añadir un nodo al grafo
+            addNode: function(nodeId) {
+                if (!this.graph.nodes.includes(nodeId)) {
+                    this.graph.nodes.push(nodeId);
+                    this.graph.adjacency[nodeId] = [];
+                    return true;
+                }
+                return false;
+            },
+            
+            // Añadir una arista al grafo
+            addEdge: function(node1, node2, weight = 1) {
+                if (!this.graph.nodes.includes(node1)) this.addNode(node1);
+                if (!this.graph.nodes.includes(node2)) this.addNode(node2);
+                
+                // Evitar aristas duplicadas
+                if (!this.graph.adjacency[node1].some(edge => edge.node === node2)) {
+                    this.graph.adjacency[node1].push({node: node2, weight});
+                    this.graph.adjacency[node2].push({node: node1, weight});
+                    this.graph.edges.push({from: node1, to: node2, weight});
+                    return true;
+                }
+                return false;
+            },
+            
+            // Generar un grafo aleatorio
+            generateRandomGraph: function(nodeCount = 8) {
+                this.graph = { nodes: [], edges: [], adjacency: {} };
+                
+                // Crear nodos
+                for (let i = 0; i < nodeCount; i++) {
+                    this.addNode(`N${i}`);
+                }
+                
+                // Crear aristas aleatorias
+                for (let i = 0; i < nodeCount; i++) {
+                    for (let j = i + 1; j < nodeCount; j++) {
+                        if (Math.random() > 0.6) {
+                            const weight = Math.floor(Math.random() * 10) + 1;
+                            this.addEdge(`N${i}`, `N${j}`, weight);
+                        }
+                    }
+                }
+                
+                return this.graph;
+            },
+            
+            // Para ver si eñ camino es más corto
+            dijkstra: function(startNode, endNode) {
+                if (!this.graph.nodes.includes(startNode) || !this.graph.nodes.includes(endNode)) {
+                    return { path: [], distance: Infinity, error: "Nodos no encontrados" };
+                }
+                
+                const distances = {};
+                const previous = {};
+                const unvisited = new Set(this.graph.nodes);
+                
+                // Inicializar distancias
+                this.graph.nodes.forEach(node => {
+                    distances[node] = node === startNode ? 0 : Infinity;
+                    previous[node] = null;
+                });
+                
+                while (unvisited.size > 0) {
+                    // Encontrar el nodo con la distancia mínima
+                    let currentNode = null;
+                    for (const node of unvisited) {
+                        if (currentNode === null || distances[node] < distances[currentNode]) {
+                            currentNode = node;
+                        }
+                    }
+                    
+                    if (distances[currentNode] === Infinity) break;
+                    
+                    // Si llegamos al nodo destino, reconstruir el camino
+                    if (currentNode === endNode) {
+                        const path = [];
+                        let node = endNode;
+                        while (node !== null) {
+                            path.unshift(node);
+                            node = previous[node];
+                        }
+                        return { path, distance: distances[endNode] };
+                    }
+                    
+                    unvisited.delete(currentNode);
+                    
+                    // Actualizar distancias de los vecinos
+                    for (const neighbor of this.graph.adjacency[currentNode]) {
+                        const alt = distances[currentNode] + neighbor.weight;
+                        if (alt < distances[neighbor.node]) {
+                            distances[neighbor.node] = alt;
+                            previous[neighbor.node] = currentNode;
+                        }
+                    }
+                }
+                
+                return { path: [], distance: Infinity, error: "No hay camino entre los nodos" };
+            },
+            
+            // Verificar si el grafo es conexo
+            isConnected: function() {
+                if (this.graph.nodes.length === 0) return true;
+                
+                const visited = new Set();
+                const stack = [this.graph.nodes[0]];
+                
+                while (stack.length > 0) {
+                    const node = stack.pop();
+                    if (!visited.has(node)) {
+                        visited.add(node);
+                        for (const neighbor of this.graph.adjacency[node]) {
+                            stack.push(neighbor.node);
+                        }
+                    }
+                }
+                
+                return visited.size === this.graph.nodes.length;
+            },
+
+            // Verificar si el grafo es euleriano
+            isEulerian: function() {
+                if (!this.isConnected()) {
+                    return { hasEulerianCycle: false, hasEulerianPath: false, oddDegreeCount: 0 };
+                }
+
+                let oddDegreeCount = 0;
+                for (const node of this.graph.nodes) {
+                    if (this.graph.adjacency[node].length % 2 !== 0) {
+                        oddDegreeCount++;
+                    }
+                }
+
+                const hasEulerianCycle = oddDegreeCount === 0;
+                const hasEulerianPath = oddDegreeCount === 0 || oddDegreeCount === 2;
+
+                return { 
+                    hasEulerianCycle, 
+                    hasEulerianPath, 
+                    oddDegreeCount,
+                    message: hasEulerianCycle ? 
+                        "El grafo tiene un ciclo euleriano (todos los grados son pares)" :
+                        hasEulerianPath ?
+                        "El grafo tiene un camino euleriano (exactamente 2 vértices de grado impar)" :
+                        "El grafo no tiene camino euleriano (más de 2 vértices de grado impar)"
+                };
+            },
+
+            // Verificar condiciones para grafo hamiltoniano (aproximación)
+            checkHamiltonian: function() {
+                const n = this.graph.nodes.length;
+                if (n < 3) return { isHamiltonian: false, message: "Se necesitan al menos 3 vértices" };
+
+                // Condición de Dirac (suficiente pero no necesaria)
+                let allLargeDegree = true;
+                for (const node of this.graph.nodes) {
+                    if (this.graph.adjacency[node].length < n / 2) {
+                        allLargeDegree = false;
+                        break;
+                    }
+                }
+
+                if (allLargeDegree) {
+                    return { 
+                        isHamiltonian: true, 
+                        message: "El grafo cumple la condición de Dirac (grado(v) ≥ n/2), por tanto es hamiltoniano",
+                        byDirac: true
+                    };
+                }
+
+                // Búsqueda simple de ciclo hamiltoniano (para grafos pequeños)
+                if (n <= 8) {
+                    const hasHamiltonian = this.findHamiltonianCycle();
+                    return {
+                        isHamiltonian: hasHamiltonian.found,
+                        message: hasHamiltonian.found ? 
+                            "Se encontró un ciclo hamiltoniano" : 
+                            "No se encontró ciclo hamiltoniano (en la búsqueda limitada)",
+                        cycle: hasHamiltonian.cycle
+                    };
+                }
+
+                return { 
+                    isHamiltonian: null, 
+                    message: "No se puede determinar fácilmente. El problema es NP-completo. Para grafos grandes se necesitan heurísticas avanzadas." 
+                };
+            },
+
+            // Búsqueda de ciclo hamiltoniano (backtracking simple)
+            findHamiltonianCycle: function() {
+                const n = this.graph.nodes.length;
+                const path = [this.graph.nodes[0]];
+                const visited = new Set([this.graph.nodes[0]]);
+
+                const backtrack = (current) => {
+                    if (path.length === n) {
+                        // Verificar si el último vértice está conectado al primero
+                        const lastNode = path[path.length - 1];
+                        const firstNode = path[0];
+                        if (this.graph.adjacency[lastNode].some(edge => edge.node === firstNode)) {
+                            return [...path, firstNode];
+                        }
+                        return null;
+                    }
+
+                    for (const neighbor of this.graph.adjacency[current]) {
+                        if (!visited.has(neighbor.node)) {
+                            visited.add(neighbor.node);
+                            path.push(neighbor.node);
+
+                            const result = backtrack(neighbor.node);
+                            if (result) return result;
+
+                            path.pop();
+                           

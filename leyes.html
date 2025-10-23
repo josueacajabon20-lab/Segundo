@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leyes de la Teoría de Conjuntos y Combinaciones</title>
+    <link rel="stylesheet" href="diseño.css" />
+</head>
+<body>
+
+<header>
+    <h1>Leyes de Conjuntos y Combinatoria</h1>
+</header>
+
+<main> 
+    <div class="combinaciones">
+        <h2>A. Combinaciones</h2> 
+        <div class="concepto">
+            <p>Se refieren a la <strong>selección de elementos</strong> de un conjunto <strong>donde el orden no importa</strong> (a diferencia de las permutaciones). Solo se considera la composición del grupo.</p>
+            <p><strong>Fórmula de Combinaciones:</strong></p>
+            <div class="formula">C(n, r) = n! / (r! * (n - r)!)</div>
+            <ul>
+                <li><strong>n</strong> es el conjunto total de elementos (conjunto de partida).</li>
+                <li><strong>r</strong> es el número de elementos que se seleccionan (tamaño de la combinación).</li>
+                <li>El signo "<strong>!</strong>" denota el <strong>factorial</strong>.</li>  
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="subtitulo-leyes">Leyes de la Teoría de Conjuntos</h2>
+
+    <div class="contenedor-leyes">
+        <section>
+            <h2>1. Leyes de De Morgan</h2>
+            <div class="ley">(A ∪ B)<sup>c</sup> = A<sup>c</sup> ∩ B<sup>c</sup></div>
+            <div class="ley">(A ∩ B)<sup>c</sup> = A<sup>c</sup> ∪ B<sup>c</sup></div>
+        </section>
+        <section>
+            <h2>2. Leyes Distributivas</h2>
+            <div class="ley">A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)</div>
+            <div class="ley">A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)</div>
+        </section> 
+        <section>
+            <h2>3. Leyes Conmutativas</h2>
+            <div class="ley">A ∪ B = B ∪ A</div>
+            <div class="ley">A ∩ B = B ∩ A</div>
+        </section>
+        <section>
+            <h2>4. Leyes Asociativas</h2>
+            <div class="ley">(A ∪ B) ∪ C = A ∪ (B ∪ C)</div>
+            <div class="ley">(A ∩ B) ∩ C = A ∪ (B ∩ C)</div>
+        </section>
+        <section>
+            <h2>5. Leyes de Identidad</h2>
+            <div class="ley">A ∪ ∅ = A</div>
+            <div class="ley">A ∩ U = A</div>
+        </section>
+        <section>
+            <h2>6. Leyes del Complemento</h2>
+            <div class="ley">A ∪ A<sup>c</sup> = U</div>
+            <div class="ley">A ∩ A<sup>c</sup> = ∅</div>
+        </section>
+        <section>
+            <h2>7. Doble Complemento</h2>
+            <div class="ley">(A<sup>c</sup>)<sup>c</sup> = A</div>
+        </section>
+        <section>
+            <h2>8. Leyes del Dominio</h2>
+            <div class="ley">A ∪ U = U</div>
+            <div class="ley">A ∩ ∅ = ∅</div>
+        </section>
+        <section>
+            <h2>9. Leyes de Idempotencia</h2>
+            <div class="ley">A ∪ A = A</div>
+            <div class="ley">A ∩ A = A</div>
+        </section>
+    </div>
+
+    <div class="boton-regresar">
+        <a href="./index.html">← Regresar a la página principal</a>
+    </div>
+</main> 
+
+<footer>
+    <p>Karen Melisa Miculax Gonzáles</p>
+</footer>
+
+</body>
+</html>
